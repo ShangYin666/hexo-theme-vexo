@@ -1,5 +1,20 @@
-<div id="article-banner">
-  <h2><%- page.title %></h2>
+<div
+  id="about-banner"
+  style="background-image: url(<%- theme.about.banner %>)"
+></div>
+<div class="author">
+  <div class="head">
+    <img src="<%- theme.about.avatar %>" />
+  </div>
+  <h3><%- config.author %></h3>
+  <% if (typeof(theme.about.description) === 'object') { %> <% for (var i in
+  theme.about.description) { %>
+  <p class="description">
+    <%- theme.about.description[i] %>
+  </p>
+  <% } %> <% } else { %>
+  <p class="description"><%- theme.about.description %></p>
+  <% } %>
   <section class="share-icons">
     <% if (theme.about.weibo_username) { %>
     <a
@@ -69,18 +84,49 @@
     </a>
     <% } %>
   </section>
-  <div class="arrow-down">
-    <a href="javascript:;"></a>
-  </div>
 </div>
-<main class="app-body" style="min-height: 600px;">
-  <section class="markdown-content"><%- page.content %></section>
+<main class="app-body flex-box">
+  <article class="post-article">
+    <section class="markdown-content"><%- page.content %></section>
+  </article>
 </main>
-
 <script>
   (function() {
-    var url = "<%= config.url %>/<%= page.path %>";
-    $("#article-banner").geopattern("plaid");
     $(".header").removeClass("fixed-header");
+    var windowH = $(window).height();
+    var author = $(".author");
+    var app_body = $(".app-body");
+    var bodyH =
+      author.offset().top +
+      author[0].offsetHeight +
+      71 +
+      $(".header").height() +
+      10;
+    console.log(windowH - bodyH, $(".header").height());
+    if (bodyH < windowH) {
+      // auth.css({
+      //   "margin-bottom": windowH - bodyH
+      // });
+      app_body.css({
+        "min-height": windowH - bodyH
+      });
+    }
+  })();
+
+  (function() {
+    var url = "<%= config.url %>/<%= page.path %>";
+    $("#article-banner").geopattern(url);
+    $(".header").removeClass("fixed-header");
+
+    var tag = location.hash.replace("#", "");
+    if (tag) {
+      var tagId = "#tag-" + tag;
+      $("html, body").animate(
+        {
+          scrollTop: $(tagId).offset().top
+        },
+        400
+      );
+    }
   })();
 </script>

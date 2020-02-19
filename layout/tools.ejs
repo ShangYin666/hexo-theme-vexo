@@ -1,0 +1,18 @@
+<div id="article-banner">
+  <h2><%- page.title %></h2>
+  <p class="post-date"><%- page.description %></p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body">
+  <section class="markdown-content"><%- page.content %></section>
+</main>
+
+<script>
+  (function() {
+    var url = "<%= config.url %>/<%= page.path %>";
+    $("#article-banner").geopattern(url);
+    $(".header").removeClass("fixed-header");
+  })();
+</script>
