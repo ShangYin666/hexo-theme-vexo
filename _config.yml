@@ -3,7 +3,7 @@ description: shangyin's blog
 keyword: golang
 favicon:
 
-excerpt_link: ">> Read more <<"
+excerpt_link: ">> Read more >>"
 
 menu:
   主页: /
@@ -13,13 +13,8 @@ menu:
   # Projects: /project/
   关于我: /about/
 
-links:
-  - title: xxxx
-    url: http://baidu.com
-  - title: xxxx
-    url: http://baidu.com
 # highlight
-highlight: tomorrow
+highlight: xcode
 
 # catalog
 catalog: true
